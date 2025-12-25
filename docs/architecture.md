@@ -1,10 +1,8 @@
 
 ---
 
-# 📘 `docs/architecture.md` (1.5 POINTS)
-
 ```md
-# 🏗️ E-Commerce Data Pipeline Architecture
+# E-Commerce Data Pipeline Architecture
 
 ## Overview
 This document describes the architecture of the e-commerce data analytics platform.
