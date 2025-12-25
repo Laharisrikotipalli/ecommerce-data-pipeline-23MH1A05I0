@@ -1,7 +1,8 @@
 # E-Commerce Data Analytics Pipeline
-### Project Overview
+## Project Overview
 
 This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into PostgreSQL, processes it through multiple schema layers, and visualizes insights using Power BI / Tableau.
+
 The pipeline follows modern data engineering best practices including staging, production, warehouse modeling, orchestration, testing, and containerization.
 ***Architecture Layers***
 ***Data Generation***
@@ -14,7 +15,8 @@ The pipeline follows modern data engineering best practices including staging, p
 ***Orchestration & Monitoring***
 
 ---
-### Data Flow (End-to-End Lineage)
+## Data Flow (End-to-End Lineage)
+```
 Synthetic CSV Data (Python Faker)
         ↓
 Staging Schema (Raw replica)
@@ -26,11 +28,7 @@ Warehouse Schema (Star schema)
 Analytics Aggregates
         ↓
 Power BI / Tableau Dashboards
-
-
-✔ Data lineage is fully traceable
-✔ Any metric in the dashboard can be traced back to raw CSV
-
+```
 ---
 ## 📂 Project Structure
 ```
@@ -169,7 +167,7 @@ This modular design makes the system easy to debug, test, and extend.
 | Slow queries | Use warehouse aggregate tables |
 | Database connection error | Check Docker PostgreSQL container status |
 
-
+---
 ## Architecture Decisions (Why?)
 ***Why PostgreSQL?***
 
@@ -199,6 +197,7 @@ Production → clean transactional truth
 
 Warehouse → analytics-optimized structure
 
+---
 ## Technical Maintainability
 Setup Instructions 
 Prerequisites
@@ -218,8 +217,7 @@ cd ecommerce-data-pipeline
 pip install -r requirements.txt
 docker-compose up -d
 ```
-
-
+---
 ## Data Model Documentation 
 Staging Schema
 Exact CSV replica
@@ -263,9 +261,7 @@ Improves dashboard performance
 ## Dashboard & Analytics Documentation 
 Dashboard Pages Explained
 Page 1: Executive Summary
-
 Purpose: High-level business overview
-
 Visuals:
 
 Total Revenue
