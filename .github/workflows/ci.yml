@@ -29,12 +29,11 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov pyarrow
 
-      # 4️⃣ Run tests (skip DB tests)
-      - name: Run pytest (CI-safe)
-        run: |
-          pytest tests/ -v \
-            --cov=scripts \
-            --cov-fail-under=70 \
-            -m "not db"
-        env:
-          PYTHONPATH: .
+      - name: Run tests with coverage
+  env:
+    PYTHONPATH: .
+  run: |
+    pytest tests/ -v \
+      --cov=scripts \
+      --cov-config=.coveragerc \
+      --cov-fail-under=70
