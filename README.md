@@ -15,20 +15,13 @@ The pipeline follows modern data engineering best practices including staging, p
 ***Orchestration & Monitoring***
 
 ---
-## Data Flow (End-to-End Lineage)
-```
-Synthetic CSV Data (Python Faker)
-        ↓
-Staging Schema (Raw replica)
-        ↓
-Production Schema (3NF normalized)
-        ↓
-Warehouse Schema (Star schema)
-        ↓
-Analytics Aggregates
-        ↓
-Power BI / Tableau Dashboards
-```
+
+## 🏗️ Architecture Overview
+
+![Architecture Overview](docs/images/architecture_overview.png)
+
+This diagram shows the high-level data flow from synthetic data generation to BI visualization.
+
 ---
 ## 📂 Project Structure
 ```
