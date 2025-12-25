@@ -28,7 +28,7 @@ Minimum 5 GB free disk space
 OS: Windows / Linux / macOS
 
 ---
-### 2. Project Services Overview
+## 2. Project Services Overview
 
 The Docker setup includes the following services:
 
