@@ -161,166 +161,190 @@ This modular design makes the system easy to debug, test, and extend.
 | Database connection error | Check Docker PostgreSQL container status |
 
 ---
-## Architecture Decisions (Why?)
-***Why PostgreSQL?***
-
-Open-source, reliable RDBMS
-
-Strong support for analytical queries
-
-Schema-based separation (staging / production / warehouse)
-
-Excellent integration with Python & BI tools
-
-***Why Star Schema for Warehouse?***
-
-Optimized for analytics & BI queries
-
-Faster aggregations
-
-Simple joins (fact → dimensions)
-
-Industry-standard dimensional modeling
-
-***Why Layered Schemas?***
-
-Staging → raw ingestion (audit & recovery)
-
-Production → clean transactional truth
-
-Warehouse → analytics-optimized structure
-
+### Technical Maintainability
+ ***Setup Instructions***
+  Prerequisites
+  ```
+- Python 3.9+
+- Docker & Docker Compose
+- PostgreSQL (via Docker)
+- Power BI Desktop
+```
 ---
-## Technical Maintainability
-Setup Instructions 
-Prerequisites
-```
-Python 3.9+
 
-Docker & Docker Compose
-
-PostgreSQL
-
-Power BI Desktop / Tableau Public
-```
-***Installation***
+Installation
 ```
 git clone <repo-url>
 cd ecommerce-data-pipeline
 pip install -r requirements.txt
 docker-compose up -d
 ```
+## Running the Data Pipeline
+```
+python scripts/pipeline_orchestrator.py
+```
+This executes:
+
+Synthetic data generation
+
+CSV ingestion into staging schema
+
+Transformation to production schema (3NF)
+
+Warehouse loading (star schema)
+
+Analytics aggregation generation
+
+***Run Individual Steps*** 
+```
+python scripts/data_generation/generate_data.py
+```
+```
+python scripts/ingestion/ingest_to_staging.py
+```
+```
+python scripts/transformation/staging_to_production.py
+```
+```
+python scripts/transformation/load_warehouse.py
+```
 ---
-## Data Model Documentation 
-Staging Schema
-Exact CSV replica
+### Data Model Documentation
+***Staging Schema***
+
+Exact replica of raw CSV data
+
 Minimal validation
+
 Temporary storage
-Purpose: raw data audit & recovery
-***Production Schema (3NF)***
-Why 3NF?
+
+***Purpose: raw data audit and recovery***
+
+#### Production Schema (3NF)
+***Why 3NF?***
+
 Eliminates redundancy
+
 Ensures data integrity
+
 Supports transactional correctness
-***Features:***
-Primary & foreign keys
-Cleaned data
+
+***Features***
+
+Primary and foreign keys
+
+Cleaned and standardized data
+
 Referential integrity enforced
-Warehouse Schema (Star Schema)
-Structure
+
+#### Warehouse Schema (Star Schema)
+***Structure***
+
 Fact Table: fact_sales
-Dimensions:
+
+***Dimensions:***
+
 dim_customer
+
 dim_product
+
 dim_date
+
 dim_payment
-Aggregates: precomputed KPIs
 
-***Why Star Schema?***
-BI-friendly
-Faster joins
-Easier metrics calculation
-SCD (Slowly Changing Dimensions)
-Type 2 implemented
-Maintains historical changes (e.g., customer segment changes)
-Ensures accurate historical analytics
+A***ggregates: Precomputed KPI tables for analytics***
+
+#### Why Star Schema?
+
+BI-friendly structure
+
+Faster joins and aggregations
+
+Simplified metric calculations
+
+Slowly Changing Dimensions (SCD)
+
+***Type 2 implemented***
+
+Maintains historical changes (e.g., customer attributes)
+
+Enables accurate historical analytics
+
 Index Strategy
-Indexes on:
+
+***Indexes applied on:***
+
 Foreign keys
+
 Date keys
+
 Frequently filtered columns
-Improves dashboard performance
 
-## Dashboard & Analytics Documentation 
-Dashboard Pages Explained
-#### Page 1: Executive Summary
-***Purpose: High-level business overview***
-Visuals:
+***Purpose:***
+
+Improve query performance
+
+Reduce dashboard load time
+
+## Dashboard Access
+
+The Power BI dashboard file (.pbix) is available at the link below:
+
+🔗 **PBIX Download Link:**  
+  https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=IxZiux
+
+To view the dashboard:
+1. Open Power BI Desktop
+2. Download or open the PBIX file
+3. Click **Refresh** to load the latest data
+
+## Dashboard Pages
+
+### Page 1: Executive Summary
+**Purpose:** High-level business overview  
+**Visuals:** Revenue, transactions, AOV, profit margin, monthly trends, category-wise revenue, payment methods, geographic distribution
+
+---
+
+### Page 2: Product Analysis
+**Purpose:** Product performance overview  
+**Visuals:** Product-wise revenue, category-wise sales
+
+---
+
+### Page 3: Customer Insights
+**Purpose:** Customer-level analysis  
+**Visuals:** Revenue by customer segment, customer distribution
+
+---
+
+### Page 4: Geographic & Trends
+**Purpose:** Location and time-based analysis  
+**Visuals:** State-wise revenue, time-based sales trends
+
+---
+
+## Metric Definitions
+```
 Total Revenue
 
-Total Transactions
-
-Average Order Value
-
-Profit Margin
-
-Monthly Revenue Trend
-
-Top Categories
-
-Payment Method Distribution
-
-Geographic Sales Map
-
-#### Page 2: Product Analysis
-
-***Purpose: Product performance insights***
-
-Insights:
-
-Top 10 products contribute majority revenue
-
-Electronics category has highest profit margin
-
-Long-tail products generate lower volume
-
-#### Page 3: Customer Insights
-
-***Purpose: Customer behavior analysis***
-
-Insights:
-
-VIP customers contribute major revenue share
-
-Customer retention trends visible
-
-CLV comparison across segments
-
-#### Page 4: Geographic & Trends
-
-***Purpose: Location & time-based analysis***
-
-Insights:
-
-Top 5 states generate most revenue
-
-Seasonal trends identified
-
-Metric Definitions 
-Total Revenue
 SUM(quantity × unit_price − discount)
-
+```
+```
 Average Order Value (AOV)
+
 Total Revenue / Total Orders
-
+```
+```
 Profit Margin
+
 (Total Revenue − Cost) / Total Revenue × 100
-
+```
+```
 Customer Lifetime Value (CLV)
-CLV = Average Order Value × Purchase Frequency × Customer Lifespan
 
-Payment method preferences vary by region
-
+Average Order Value × Purchase Frequency × Customer Lifespan
+```
 ---
 ## Declaration
 
