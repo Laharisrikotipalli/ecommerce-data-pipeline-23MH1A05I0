@@ -1,109 +1,185 @@
-# scripts/scheduler.py
-
-import subprocess
 import time
-import yaml
+import json
 import logging
+import traceback
 from datetime import datetime
 from pathlib import Path
-import schedule
-import sys
-import os
+def main():
+    return True
 
-# --------------------------------------------------
-# Paths
-# --------------------------------------------------
-BASE_DIR = Path(__file__).resolve().parent.parent
-CONFIG_FILE = CONFIG_FILE = BASE_DIR / "config" / "config.yaml"
 
-LOCK_FILE = BASE_DIR / "pipeline.lock"
-LOG_DIR = BASE_DIR / "logs"
-LOG_DIR.mkdir(exist_ok=True)
+# ==================================================
+# Paths & Directories
+# ==================================================
+LOG_DIR = Path("logs")
+REPORT_DIR = Path("data/processed")
 
-SCHEDULER_LOG = LOG_DIR / "scheduler_activity.log"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
-# --------------------------------------------------
-# Logging
-# --------------------------------------------------
+RUN_TS = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+MAIN_LOG_FILE = LOG_DIR / f"pipeline_orchestrator_{RUN_TS}.log"
+ERROR_LOG_FILE = LOG_DIR / "pipeline_errors.log"
+
+# ==================================================
+# Logging Configuration
+# ==================================================
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
     handlers=[
-        logging.FileHandler(SCHEDULER_LOG),
+        logging.FileHandler(MAIN_LOG_FILE),
         logging.StreamHandler()
     ]
 )
 
-# --------------------------------------------------
-# Load config
-# --------------------------------------------------
-with open(CONFIG_FILE) as f:
-    config = yaml.safe_load(f)
+error_logger = logging.getLogger("pipeline_errors")
+error_handler = logging.FileHandler(ERROR_LOG_FILE)
+error_logger.addHandler(error_handler)
+error_logger.setLevel(logging.ERROR)
 
-RUN_TIME = config["scheduler"]["run_time"]
-PREVENT_CONCURRENT = config["scheduler"]["prevent_concurrent"]
+# ==================================================
+# Custom Exception for Transient Errors
+# ==================================================
+class TransientError(Exception):
+    """Retryable errors like DB timeout, network issue"""
+    pass
 
-# --------------------------------------------------
-# Lock Handling (Concurrency Prevention)
-# --------------------------------------------------
-def is_pipeline_running():
-    return LOCK_FILE.exists()
+# ==================================================
+# Pipeline Step Implementations (Replace with real logic later)
+# ==================================================
+def data_generation():
+    time.sleep(1)
+    return 1000
 
-def create_lock():
-    LOCK_FILE.write_text(str(os.getpid()))
+def data_ingestion():
+    time.sleep(1)
+    return 1000
 
-def remove_lock():
-    if LOCK_FILE.exists():
-        LOCK_FILE.unlink()
+def data_quality_checks():
+    time.sleep(1)
+    return 995
 
-# --------------------------------------------------
-# Pipeline Runner
-# --------------------------------------------------
+def staging_to_production():
+    time.sleep(1)
+    return 995
+
+def warehouse_load():
+    time.sleep(1)
+    return 995
+
+def analytics_generation():
+    time.sleep(1)
+    return 5
+
+# ==================================================
+# Step Executor with Retry + Backoff
+# ==================================================
+def execute_step(step_name, step_function, max_retries=3):
+    retries = 0
+    start_time = time.time()
+
+    while True:
+        try:
+            logging.info(f"START step: {step_name}")
+            records = step_function()
+
+            duration = round(time.time() - start_time, 2)
+
+            logging.info(
+                f"SUCCESS step: {step_name} | records={records} | duration={duration}s"
+            )
+
+            return {
+                "status": "success",
+                "duration_seconds": duration,
+                "records_processed": records,
+                "error_message": None,
+                "retry_attempts": retries
+            }
+
+        except TransientError as te:
+            retries += 1
+            if retries > max_retries:
+                logging.error(f"Max retries exceeded for {step_name}")
+                raise
+
+            backoff = 2 ** (retries - 1)
+            logging.warning(
+                f"Transient error in {step_name}. Retry {retries}/{max_retries} after {backoff}s"
+            )
+            time.sleep(backoff)
+
+        except Exception as e:
+            error_logger.error(
+                f"FAILED step: {step_name}\n{traceback.format_exc()}"
+            )
+            raise
+
+# ==================================================
+# Main Pipeline Orchestrator
+# ==================================================
 def run_pipeline():
-    if PREVENT_CONCURRENT and is_pipeline_running():
-        logging.warning("Pipeline already running. Skipping execution.")
-        return
+    pipeline_start_time = datetime.utcnow()
+    pipeline_start_iso = pipeline_start_time.isoformat()
+
+    report = {
+        "pipeline_execution_id": f"PIPE_{RUN_TS}",
+        "start_time": pipeline_start_iso,
+        "end_time": None,
+        "total_duration_seconds": None,
+        "status": None,
+        "steps_executed": {},
+        "data_quality_summary": {
+            "quality_score": 100,
+            "critical_issues": 0
+        },
+        "errors": [],
+        "warnings": []
+    }
+
+    steps = [
+        ("data_generation", data_generation),
+        ("data_ingestion", data_ingestion),
+        ("data_quality_checks", data_quality_checks),
+        ("staging_to_production", staging_to_production),
+        ("warehouse_load", warehouse_load),
+        ("analytics_generation", analytics_generation)
+    ]
 
     try:
-        logging.info("Scheduler triggered pipeline execution")
-        create_lock()
+        for step_name, step_func in steps:
+            result = execute_step(step_name, step_func)
+            report["steps_executed"][step_name] = result
 
-        result = subprocess.run(
-            [sys.executable, "scripts/pipeline_orchestrator.py"],
-            cwd=BASE_DIR,
-            capture_output=True,
-            text=True
-        )
-
-        if result.returncode == 0:
-            logging.info("Pipeline execution SUCCESS")
-            subprocess.run(
-                [sys.executable, "scripts/cleanup_old_data.py"],
-                cwd=BASE_DIR
-            )
-        else:
-            logging.error("Pipeline execution FAILED")
-            logging.error(result.stderr)
+        report["status"] = "success"
 
     except Exception as e:
-        logging.error(f"Scheduler failure: {str(e)}")
+        report["status"] = "failed"
+        report["errors"].append(str(e))
+        logging.error("PIPELINE FAILED – Execution stopped")
 
     finally:
-        remove_lock()
+        pipeline_end_time = datetime.utcnow()
+        report["end_time"] = pipeline_end_time.isoformat()
 
-# --------------------------------------------------
-# Scheduler Setup
-# --------------------------------------------------
-schedule.every().day.at(RUN_TIME).do(run_pipeline)
+        # ✅ FIXED DURATION CALCULATION (NO ERROR)
+        report["total_duration_seconds"] = round(
+            (pipeline_end_time - pipeline_start_time).total_seconds(),
+            2
+        )
 
-logging.info(f"Scheduler started. Pipeline scheduled daily at {RUN_TIME}")
+        report_path = REPORT_DIR / "pipeline_execution_report.json"
+        with open(report_path, "w") as f:
+            json.dump(report, f, indent=2)
 
-# --------------------------------------------------
-# Scheduler Loop
-# --------------------------------------------------
-try:
-    while True:
-        schedule.run_pending()
-        time.sleep(30)
-except KeyboardInterrupt:
-    logging.info("Scheduler stopped manually")
+        logging.info("Pipeline execution report generated successfully")
+        logging.info(f"Report location: {report_path}")
+
+# ==================================================
+# Entry Point
+# ==================================================
+if __name__ == "__main__":
+    main()
+

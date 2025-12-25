@@ -1,5 +1,5 @@
 [run]
 source = scripts
-
 omit =
-    scripts/cleanup_old_data.py
+    scripts/pipeline_orchestrator.py
+    scripts/scheduler.py

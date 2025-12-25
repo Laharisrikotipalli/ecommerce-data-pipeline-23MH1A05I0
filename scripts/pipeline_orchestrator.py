@@ -5,6 +5,7 @@ import traceback
 from datetime import datetime
 from pathlib import Path
 def main():
+    run_pipeline()
     return True
 
 
