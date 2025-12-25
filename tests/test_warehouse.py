@@ -1,27 +1,36 @@
+import os
 import psycopg2
 
+# Database configuration
+# Uses CI environment variables when available
+# Falls back to local Docker configuration
 DB_CONFIG = {
-    "host": "localhost",
-    "port": 5433,
-    "dbname": "ecommerce_db",
-    "user": "admin",
-    "password": "password"
+    "host": os.getenv("DB_HOST", "localhost"),
+    "port": int(os.getenv("DB_PORT", 5433)),
+    "dbname": os.getenv("DB_NAME", "ecommerce_db"),
+    "user": os.getenv("DB_USER", "admin"),
+    "password": os.getenv("DB_PASSWORD", "password"),
 }
+
 
 def test_fact_table_exists():
     conn = psycopg2.connect(**DB_CONFIG)
     cur = conn.cursor()
 
-    cur.execute("""
+    cur.execute(
+        """
         SELECT EXISTS (
             SELECT 1
             FROM information_schema.tables
             WHERE table_schema = 'warehouse'
               AND table_name = 'fact_sales'
         )
-    """)
+        """
+    )
 
     assert cur.fetchone()[0]
+
+    cur.close()
     conn.close()
 
 
@@ -36,4 +45,6 @@ def test_fact_grain_matches_transaction_items():
     item_count = cur.fetchone()[0]
 
     assert fact_count == item_count
+
+    cur.close()
     conn.close()
