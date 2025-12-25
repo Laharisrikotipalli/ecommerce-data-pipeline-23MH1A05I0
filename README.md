@@ -4,15 +4,7 @@
 This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into ***PostgreSQL***, processes it through multiple schema layers, and visualizes insights using ***Power BI***.
 
 The pipeline follows modern data engineering best practices including staging, production, warehouse modeling, orchestration, testing, and containerization.
-***Architecture Layers**,
-***Data Generation**,
-***Data Ingestion**,
-***Staging Schema**,
-***Production Schema**,
-***Warehouse Schema**,
-***Analytics Layer**,
-***BI Visualization Layer**,
-***Orchestration & Monitoring**.
+**Architecture Layers**,**Data Generation**,**Data Ingestion**,**Staging Schema**,**Production Schema**,**Warehouse Schema**,**Analytics Layer**,**BI Visualization Layer**,**Orchestration & Monitoring**.
 
 ---
 
@@ -20,7 +12,7 @@ The pipeline follows modern data engineering best practices including staging, p
 
 ![Architecture Overview](docs/image/architecture_overview.png)
 
-This diagram shows the high-level data flow from synthetic data generation to BI visualization.
+**This diagram shows the high-level data flow from synthetic data generation to BI visualization.**
 
 ---
 ## Project Structure
@@ -131,7 +123,7 @@ ecommerce-data-pipeline/
 ---
 ## Code Organization & Maintainability
 
-The project follows a modular pipeline-based structure where each folder represents a single responsibility.
+***The project follows a modular pipeline-based structure where each folder represents a single responsibility.***
 
 ### Scripts Structure
 - `data_generation/` – Synthetic data generation using Faker
@@ -162,7 +154,8 @@ This modular design makes the system easy to debug, test, and extend.
 
 ---
 ### Technical Maintainability
- ***Setup Instructions***
+ **Setup Instructions**
+ 
  #### Prerequisites
   ```
 - Python 3.9+
@@ -204,6 +197,7 @@ python scripts/transformation/load_warehouse.py
 ---
 
 ### Data Model Documentation
+
 **Staging Schema**
 
 Exact replica of raw CSV data , Minimal validation , Temporary storage
@@ -225,6 +219,7 @@ Primary and foreign keys , Cleaned and standardized data , Referential integrity
 #### Warehouse Schema (Star Schema)
 
 **Structure**
+
 Fact Table: fact_sales
 
 **Dimensions:**
@@ -332,7 +327,3 @@ Any references or tools used have been duly acknowledged, and this work has not 
 **Email: laharisrikotipalli07@gmail.com**
 **Submission Date: 25-12-2025**
 
----
-## Conclusion
-
-This Power BI dashboard effectively transforms raw e-commerce data into meaningful visual insights, enabling better business understanding and decision-making.
