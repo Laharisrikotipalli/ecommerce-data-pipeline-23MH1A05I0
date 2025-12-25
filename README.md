@@ -163,7 +163,7 @@ This modular design makes the system easy to debug, test, and extend.
 ---
 ### Technical Maintainability
  ***Setup Instructions***
-  Prerequisites
+ #### Prerequisites
   ```
 - Python 3.9+
 - Docker & Docker Compose
@@ -172,28 +172,21 @@ This modular design makes the system easy to debug, test, and extend.
 ```
 ---
 
-Installation
+#### Installation
 ```
 git clone <repo-url>
 cd ecommerce-data-pipeline
 pip install -r requirements.txt
 docker-compose up -d
 ```
+---
 ## Running the Data Pipeline
 ```
 python scripts/pipeline_orchestrator.py
 ```
-This executes:
+***This executes:***
 
-Synthetic data generation
-
-CSV ingestion into staging schema
-
-Transformation to production schema (3NF)
-
-Warehouse loading (star schema)
-
-Analytics aggregation generation
+Synthetic data generation , CSV ingestion into staging schema , Transformation to production schema (3NF) , Warehouse loading (star schema) , Analytics aggregation generation
 
 ***Run Individual Steps*** 
 ```
@@ -209,50 +202,32 @@ python scripts/transformation/staging_to_production.py
 python scripts/transformation/load_warehouse.py
 ```
 ---
+
 ### Data Model Documentation
 ***Staging Schema***
 
-Exact replica of raw CSV data
-
-Minimal validation
-
-Temporary storage
+Exact replica of raw CSV data , Minimal validation , Temporary storage
 
 ***Purpose: raw data audit and recovery***
 
 #### Production Schema (3NF)
 ***Why 3NF?***
 
-Eliminates redundancy
-
-Ensures data integrity
-
-Supports transactional correctness
+Eliminates redundancy , Ensures data integrity , Supports transactional correctness
 
 ***Features***
-
-Primary and foreign keys
-
-Cleaned and standardized data
-
-Referential integrity enforced
+Primary and foreign keys , Cleaned and standardized data , Referential integrity enforced
 
 #### Warehouse Schema (Star Schema)
 ***Structure***
-
 Fact Table: fact_sales
-
 ***Dimensions:***
-
 dim_customer
-
 dim_product
-
 dim_date
-
 dim_payment
 
-A***ggregates: Precomputed KPI tables for analytics***
+***Aggregates: Precomputed KPI tables for analytics***
 
 #### Why Star Schema?
 
@@ -274,17 +249,9 @@ Index Strategy
 
 ***Indexes applied on:***
 
-Foreign keys
+Foreign keys , Date keys , Frequently filtered columns
 
-Date keys
-
-Frequently filtered columns
-
-***Purpose:***
-
-Improve query performance
-
-Reduce dashboard load time
+***Purpose: Improve query performance , Reduce dashboard load time***
 
 ## Dashboard Access
 
