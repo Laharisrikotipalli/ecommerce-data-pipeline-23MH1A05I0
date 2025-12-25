@@ -288,7 +288,7 @@ dim_payment
 The Power BI dashboard file (.pbix) is available at the link below:
 
 **PBIX Download Link:**  
-  https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=IxZiux
+https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=j8mJbj
 
 To view the dashboard:
 1. Open Power BI Desktop
