@@ -154,16 +154,15 @@ This modular design makes the system easy to debug, test, and extend.
 
 ---
 ### Technical Maintainability
- **Setup Instructions**
- 
- #### Prerequisites
-  ```
+
+#### Setup Instructions
+
+##### Prerequisites
+```text
 - Python 3.9+
 - Docker & Docker Compose
 - PostgreSQL (via Docker)
 - Power BI Desktop
-```
----
 
 #### Installation
 ```
@@ -179,7 +178,16 @@ python scripts/pipeline_orchestrator.py
 ```
 ***This executes:***
 
-Synthetic data generation , CSV ingestion into staging schema , Transformation to production schema (3NF) , Warehouse loading (star schema) , Analytics aggregation generation
+Synthetic data generation
+
+CSV ingestion into staging schema
+
+Transformation to production schema (3NF)
+
+Warehouse loading (star schema)
+
+Analytics aggregation generation
+---
 
 ***Run Individual Steps*** 
 ```
@@ -276,11 +284,10 @@ dim_payment
 
 
 ## Dashboard Access
-
 The Power BI dashboard file (.pbix) is available at the link below:
 
 **PBIX Download Link:**  
-https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=IxZiux
+  https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=IxZiux
 
 To view the dashboard:
 1. Open Power BI Desktop
