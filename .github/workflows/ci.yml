@@ -67,19 +67,16 @@ jobs:
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_production_schema.sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_warehouse_schema.sql
 
-      # 7️⃣ Run unit tests with coverage
-      - name: Run unit tests
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_NAME: ecommerce_db_test
-          DB_USER: test_user
-          DB_PASSWORD: test_password
-          PGPASSWORD: test_password
-        run: |
-          pytest tests/ -v --cov=scripts
-
-      # 8️⃣ Enforce coverage threshold
-      - name: Enforce coverage threshold
-        run: |
-          coverage report --fail-under=70
+      - name: Run unit tests with coverage
+  env:
+    DB_HOST: localhost
+    DB_PORT: 5432
+    DB_NAME: ecommerce_db_test
+    DB_USER: test_user
+    DB_PASSWORD: test_password
+    PGPASSWORD: test_password
+  run: |
+    pytest tests/ -v \
+      --cov=scripts \
+      --cov-config=.coveragerc \
+      --cov-fail-under=70
