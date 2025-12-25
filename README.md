@@ -18,7 +18,7 @@ The pipeline follows modern data engineering best practices including staging, p
 
 ## 🏗️ Architecture Overview
 
-![Architecture Overview](docs/images/architecture_overview.png)
+![Architecture Overview](docs/image/architecture_overview.png)
 
 This diagram shows the high-level data flow from synthetic data generation to BI visualization.
 
