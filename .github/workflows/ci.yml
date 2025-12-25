@@ -2,9 +2,9 @@ name: Data Pipeline CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
   test:
@@ -26,38 +26,21 @@ jobs:
           --health-retries 5
 
     steps:
-      # 1️⃣ Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      # 2️⃣ Setup Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-          cache: pip
 
-      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest pytest-cov psycopg2-binary
+          pip install pytest pytest-cov
+          - name: Install dependencies
 
-      # 4️⃣ Install PostgreSQL client
       - name: Install PostgreSQL client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y postgresql-client
+        run: sudo apt-get install -y postgresql-client
 
-      # 5️⃣ Wait for PostgreSQL
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          for i in {1..10}; do
-            pg_isready -h localhost -p 5432 && break
-            sleep 5
-          done
-
-      # 6️⃣ Create schemas
       - name: Create database schemas
         env:
           PGPASSWORD: test_password
@@ -66,17 +49,14 @@ jobs:
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_production_schema.sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_warehouse_schema.sql
 
-      # 7️⃣ Run tests + enforce coverage
-      - name: Run unit tests with coverage
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_NAME: ecommerce_db_test
-          DB_USER: test_user
-          DB_PASSWORD: test_password
-          PGPASSWORD: test_password
-        run: |
-          pytest tests/ -v \
-            --cov=scripts \
-            --cov-config=.coveragerc \
-            --cov-fail-under=70
+      - name: Run unit tests
+  env:
+    DB_HOST: localhost
+    DB_PORT: 5432
+    DB_NAME: ecommerce_db_test
+    DB_USER: test_user
+    DB_PASSWORD: test_password
+    PGPASSWORD: test_password
+    PYTHONPATH: .
+  run: |
+    pytest tests/ -v --cov=scripts --cov-fail-under=70

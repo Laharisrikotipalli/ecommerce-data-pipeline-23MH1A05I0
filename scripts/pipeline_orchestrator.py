@@ -1,11 +1,12 @@
-# scripts/pipeline_orchestrator.py
-
 import time
 import json
 import logging
 import traceback
 from datetime import datetime
 from pathlib import Path
+def main():
+    return True
+
 
 # ==================================================
 # Paths & Directories
@@ -180,4 +181,5 @@ def run_pipeline():
 # Entry Point
 # ==================================================
 if __name__ == "__main__":
-    run_pipeline()
+    main()
+
