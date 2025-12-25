@@ -194,6 +194,7 @@ python scripts/transformation/staging_to_production.py
 ```
 python scripts/transformation/load_warehouse.py
 ```
+---
 ### Data Model Documentation
 
 #### Staging Schema
