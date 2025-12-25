@@ -1,0 +1,11 @@
+product_name,category,total_revenue,units_sold,avg_price,revenue_rank
+Product_18,Books,79377.6,160,496.11,1
+Product_27,Books,78537.06,158,497.07,2
+Product_483,Beauty,78315.48,166,471.78,3
+Product_356,Home & Kitchen,75151.52,166,452.72,4
+Product_367,Beauty,72594.6,156,465.35,5
+Product_238,Home & Kitchen,71160.39,161,441.99,6
+Product_8,Electronics,69706.78,143,487.46,7
+Product_292,Beauty,69006.32,142,485.96,8
+Product_82,Beauty,68455.95,145,472.11,9
+Product_355,Books,67494.24,144,468.71,10

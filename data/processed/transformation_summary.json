@@ -1,0 +1,36 @@
+{
+    "transformation_timestamp": "2025-12-24T05:25:16.045423",
+    "records_processed": {
+        "customers": {
+            "input": 100,
+            "output": 100,
+            "filtered": 0
+        },
+        "products": {
+            "input": 50,
+            "output": 50,
+            "filtered": 0
+        },
+        "transactions": {
+            "input": 300,
+            "output": 300,
+            "filtered": 0
+        },
+        "transaction_items": {
+            "input": 908,
+            "output": 908,
+            "filtered": 0
+        }
+    },
+    "transformations_applied": [
+        "email_normalization",
+        "name_split",
+        "price_category_assignment",
+        "profit_margin_enrichment",
+        "schema_alignment"
+    ],
+    "data_quality_post_transform": {
+        "null_violations": 0,
+        "constraint_violations": 0
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "dashboard_name": "E-Commerce Sales Dashboard",
+  "tool": "Power BI",
+  "data_source": "PostgreSQL",
+  "pages": [
+    "Executive Overview",
+    "Product Performance",
+    "Customer Insights",
+    "Sales Trends"
+  ],
+  "kpis": [
+    "Total Revenue",
+    "Total Orders",
+    "Total Customers",
+    "Average Order Value",
+    "Profit"
+  ],
+  "features": [
+    "Interactive slicers",
+    "Drill-through",
+    "Tooltips",
+    "Page navigation"
+  ],
+  "status": "Completed"
+}

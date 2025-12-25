@@ -1,0 +1,35 @@
+{
+  "monitoring_timestamp": "2025-12-24T15:14:09.168119",
+  "pipeline_health": "ok",
+  "checks": {
+    "last_execution": {
+      "status": "ok",
+      "last_run": "2025-12-24T12:52:42.864524",
+      "hours_since_last_run": 2.3573065541666667,
+      "threshold_hours": 25
+    },
+    "data_freshness": {
+      "status": "ok",
+      "max_lag_hours": 10.31
+    },
+    "data_volume_anomalies": {
+      "status": "ok",
+      "actual_count": 908,
+      "expected_range": null,
+      "anomaly_type": null
+    },
+    "data_quality": {
+      "status": "ok",
+      "quality_score": 100,
+      "orphan_records": 0,
+      "null_violations": 0
+    },
+    "database_connectivity": {
+      "status": "ok",
+      "response_time_ms": 1.0,
+      "connections_active": 6
+    }
+  },
+  "alerts": [],
+  "overall_health_score": 100
+}

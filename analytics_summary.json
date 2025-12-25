@@ -1,0 +1,57 @@
+{
+    "generation_timestamp": "2025-12-21T18:08:42.343372",
+    "queries_executed": 10,
+    "query_results": {
+        "query1_top_products": {
+            "rows": 10,
+            "columns": 5,
+            "execution_time_ms": 51.96
+        },
+        "query2_monthly_trend": {
+            "rows": 12,
+            "columns": 3,
+            "execution_time_ms": 54.22
+        },
+        "query3_segmentation": {
+            "rows": 4,
+            "columns": 2,
+            "execution_time_ms": 11.13
+        },
+        "query4_clv": {
+            "rows": 10,
+            "columns": 2,
+            "execution_time_ms": 12.12
+        },
+        "query5_margins": {
+            "rows": 5,
+            "columns": 4,
+            "execution_time_ms": 9.42
+        },
+        "query6_payment_methods": {
+            "rows": 4,
+            "columns": 2,
+            "execution_time_ms": 9.21
+        },
+        "query7_reorder_rate": {
+            "rows": 500,
+            "columns": 2,
+            "execution_time_ms": 8.43
+        },
+        "query8_daily_velocity": {
+            "rows": 30,
+            "columns": 3,
+            "execution_time_ms": 2.62
+        },
+        "query9_underperforming": {
+            "rows": 10,
+            "columns": 2,
+            "execution_time_ms": 8.3
+        },
+        "query10_peak_days": {
+            "rows": 7,
+            "columns": 2,
+            "execution_time_ms": 9.15
+        }
+    },
+    "total_execution_time_seconds": 0.18
+}

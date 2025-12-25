@@ -1,0 +1,38 @@
+# 1. Database Configuration
+database:
+  db_name: "ecommerce_db"
+  port: 5432
+  host: "localhost"
+
+# 2. Data Generation Parameters
+data_generation:
+  customer_count: 1000
+  product_count: 500
+  transaction_count: 10000
+  transaction_item_count: 20000
+  date_range_years: 3
+
+# 3. Pipeline Configuration
+pipeline:
+  batch_size: 1000
+  logging_level: "INFO"
+  retry_attempts: 3
+
+# 4. BI Tool Selection
+bi_tool:
+  provider: "Power BI"   # Tableau or Power BI
+
+# 5. Scheduler Configuration (TOP LEVEL — IMPORTANT)
+scheduler:
+  run_time: "20:30"        # Daily execution time (24h)
+  timezone: "local"
+  catch_up_missed: false
+  prevent_concurrent: true
+
+# 6. Retention Policy
+retention:
+  days: 7
+  preserve_keywords:
+    - summary
+    - report
+    - metadata
