@@ -26,7 +26,7 @@ jobs:
           --health-retries 5
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -37,11 +37,11 @@ jobs:
           python-version: "3.9"
           cache: pip
 
-      # 3️⃣ Install Python dependencies
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov psycopg2-binary
 
       # 4️⃣ Install PostgreSQL client
       - name: Install PostgreSQL client
@@ -49,7 +49,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y postgresql-client
 
-      # 5️⃣ Wait for PostgreSQL readiness
+      # 5️⃣ Wait for PostgreSQL
       - name: Wait for PostgreSQL to be ready
         run: |
           for i in {1..10}; do
@@ -57,26 +57,26 @@ jobs:
             sleep 5
           done
 
-      # 6️⃣ Create database schemas
+      # 6️⃣ Create schemas
       - name: Create database schemas
         env:
           PGPASSWORD: test_password
         run: |
-          ls -R sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_staging_schema.sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_production_schema.sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_warehouse_schema.sql
 
+      # 7️⃣ Run tests + enforce coverage
       - name: Run unit tests with coverage
-  env:
-    DB_HOST: localhost
-    DB_PORT: 5432
-    DB_NAME: ecommerce_db_test
-    DB_USER: test_user
-    DB_PASSWORD: test_password
-    PGPASSWORD: test_password
-  run: |
-    pytest tests/ -v \
-      --cov=scripts \
-      --cov-config=.coveragerc \
-      --cov-fail-under=70
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: ecommerce_db_test
+          DB_USER: test_user
+          DB_PASSWORD: test_password
+          PGPASSWORD: test_password
+        run: |
+          pytest tests/ -v \
+            --cov=scripts \
+            --cov-config=.coveragerc \
+            --cov-fail-under=70
