@@ -163,13 +163,14 @@ This modular design makes the system easy to debug, test, and extend.
 - Docker & Docker Compose
 - PostgreSQL (via Docker)
 - Power BI Desktop
-
+```
 #### Installation
 ```
 git clone <repo-url>
 cd ecommerce-data-pipeline
 pip install -r requirements.txt
 docker-compose up -d
+
 ```
 ---
 ## Running the Data Pipeline
