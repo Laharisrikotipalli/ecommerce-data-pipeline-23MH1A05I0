@@ -4,15 +4,15 @@
 This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into ***PostgreSQL***, processes it through multiple schema layers, and visualizes insights using ***Power BI***.
 
 The pipeline follows modern data engineering best practices including staging, production, warehouse modeling, orchestration, testing, and containerization.
-***Architecture Layers***,
-***Data Generation***,
-***Data Ingestion***,
-***Staging Schema***,
-***Production Schema***,
-***Warehouse Schema***,
-***Analytics Layer***,
-***BI Visualization Layer***,
-***Orchestration & Monitoring***.
+***Architecture Layers**,
+***Data Generation**,
+***Data Ingestion**,
+***Staging Schema**,
+***Production Schema**,
+***Warehouse Schema**,
+***Analytics Layer**,
+***BI Visualization Layer**,
+***Orchestration & Monitoring**.
 
 ---
 
@@ -204,11 +204,13 @@ python scripts/transformation/load_warehouse.py
 ---
 
 ### Data Model Documentation
-***Staging Schema***
+**Staging Schema**
 
 Exact replica of raw CSV data , Minimal validation , Temporary storage
 
-***Purpose: raw data audit and recovery***
+***Purpose**: raw data audit and recovery
+
+---
 
 #### Production Schema (3NF)
 ***Why 3NF?***
@@ -218,16 +220,22 @@ Eliminates redundancy , Ensures data integrity , Supports transactional correctn
 ***Features***
 Primary and foreign keys , Cleaned and standardized data , Referential integrity enforced
 
+---
+
 #### Warehouse Schema (Star Schema)
-***Structure***
+
+**Structure**
 Fact Table: fact_sales
-***Dimensions:***
+
+**Dimensions:**
 dim_customer
 dim_product
 dim_date
 dim_payment
 
-***Aggregates: Precomputed KPI tables for analytics***
+**Aggregates**: Precomputed KPI tables for analytics
+
+---
 
 #### Why Star Schema?
 
@@ -239,7 +247,7 @@ Simplified metric calculations
 
 Slowly Changing Dimensions (SCD)
 
-***Type 2 implemented***
+**Type 2 implemented**
 
 Maintains historical changes (e.g., customer attributes)
 
@@ -247,23 +255,26 @@ Enables accurate historical analytics
 
 Index Strategy
 
-***Indexes applied on:***
+**Indexes applied on:**
 
 Foreign keys , Date keys , Frequently filtered columns
 
-***Purpose: Improve query performance , Reduce dashboard load time***
+**Purpose:** Improve query performance , Reduce dashboard load time
+
+---
 
 ## Dashboard Access
 
 The Power BI dashboard file (.pbix) is available at the link below:
 
-🔗 **PBIX Download Link:**  
-  https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=IxZiux
+**PBIX Download Link:**  
+https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=IxZiux
 
 To view the dashboard:
 1. Open Power BI Desktop
 2. Download or open the PBIX file
 3. Click **Refresh** to load the latest data
+---
 
 ## Dashboard Pages
 
@@ -292,24 +303,21 @@ To view the dashboard:
 ---
 
 ## Metric Definitions
-```
-Total Revenue
 
+***Total Revenue***
+```
 SUM(quantity × unit_price − discount)
 ```
+***Average Order Value (AOV)***
 ```
-Average Order Value (AOV)
-
 Total Revenue / Total Orders
 ```
+***Profit Margin***
 ```
-Profit Margin
-
 (Total Revenue − Cost) / Total Revenue × 100
 ```
+***Customer Lifetime Value (CLV)***
 ```
-Customer Lifetime Value (CLV)
-
 Average Order Value × Purchase Frequency × Customer Lifespan
 ```
 ---
@@ -319,10 +327,10 @@ I hereby declare that this project titled “Power BI E-Commerce Analytics Dashb
 The data, analysis, and dashboard visuals presented in this project are created for academic and learning purposes.
 Any references or tools used have been duly acknowledged, and this work has not been submitted elsewhere for any other degree or certification.
 
-***Name: Kotipalli Lahari Sri
-Roll.No: 23MH1A05I0
-Email: laharisrikotipalli07@gmail.com
-Submission Date: 25-12-2025***
+**Name: Kotipalli Lahari Sri**
+**Roll.No: 23MH1A05I0**
+**Email: laharisrikotipalli07@gmail.com**
+**Submission Date: 25-12-2025**
 
 ---
 ## Conclusion
