@@ -1,3 +1,3 @@
 def test_pipeline_modules_import():
-    import scripts.pipeline_orchestrator
-    import scripts.scheduler
+    import pipeline_orchestrator
+    import scheduler
