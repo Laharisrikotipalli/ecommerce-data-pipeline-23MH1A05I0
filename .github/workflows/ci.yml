@@ -40,13 +40,21 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          for i in {1..10}; do
+            pg_isready -h localhost -p 5432 && break
+            sleep 5
+          done
+
       - name: Create database schemas
         env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_NAME: ecommerce_db_test
-          DB_USER: test_user
-          DB_PASSWORD: test_password
+          PGPASSWORD: test_password
         run: |
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_staging_tables.sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_production_tables.sql
@@ -59,6 +67,7 @@ jobs:
           DB_NAME: ecommerce_db_test
           DB_USER: test_user
           DB_PASSWORD: test_password
+          PGPASSWORD: test_password
         run: |
           pytest tests/ -v --cov=scripts
 
