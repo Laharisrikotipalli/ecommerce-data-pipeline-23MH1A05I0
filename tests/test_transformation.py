@@ -1,5 +1,9 @@
 import os
 import psycopg2
+import pytest
+
+pytestmark = pytest.mark.db
+
 
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "localhost"),
