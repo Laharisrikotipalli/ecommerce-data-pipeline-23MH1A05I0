@@ -1,17 +1,12 @@
 import os
-import pytest
-
-if not os.getenv("CI"):
-    pytest.skip("Skipping DB tests locally", allow_module_level=True)
-
 import psycopg2
 
 DB_CONFIG = {
-    "host": "localhost",
-    "port": 5433,
-    "dbname": "ecommerce_db",
-    "user": "admin",
-    "password": "password"
+    "host": os.getenv("DB_HOST", "localhost"),
+    "port": int(os.getenv("DB_PORT", 5432)),
+    "dbname": os.getenv("DB_NAME"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
 }
 
 def test_fact_table_exists():
@@ -28,6 +23,8 @@ def test_fact_table_exists():
     """)
 
     assert cur.fetchone()[0]
+
+    cur.close()
     conn.close()
 
 def test_fact_grain_matches_transaction_items():
@@ -41,4 +38,6 @@ def test_fact_grain_matches_transaction_items():
     item_count = cur.fetchone()[0]
 
     assert fact_count == item_count
+
+    cur.close()
     conn.close()
