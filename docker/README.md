@@ -11,21 +11,21 @@ Ensure the following are installed on your system:
 ### Software Requirements
 - Docker Engine **v20.10+**
 - Docker Compose **v2.0+**
----
+  
 #### Verify installation:
 
 ```bash
 docker --version
 docker compose version
 ```
----
+
 ### System Requirements
 
 Minimum 4 GB RAM
 
 Minimum 5 GB free disk space
 
-OS: Windows / Linux / macOS
+**OS:** Windows / Linux / macOS
 
 ---
 ## 2. Project Services Overview
