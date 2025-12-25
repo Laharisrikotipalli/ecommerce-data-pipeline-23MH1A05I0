@@ -26,20 +26,25 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest pytest-cov
-          - name: Install dependencies
+          pip install pytest pytest-cov schedule pyarrow
 
-      - name: Install PostgreSQL client
-        run: sudo apt-get install -y postgresql-client
+      - name: Wait for PostgreSQL
+        run: |
+          for i in {1..10}; do
+            pg_isready -h localhost -p 5432 && break
+            sleep 5
+          done
 
       - name: Create database schemas
         env:
@@ -49,14 +54,14 @@ jobs:
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_production_schema.sql
           psql -h localhost -U test_user -d ecommerce_db_test -f sql/ddl/create_warehouse_schema.sql
 
-      - name: Run unit tests
-  env:
-    DB_HOST: localhost
-    DB_PORT: 5432
-    DB_NAME: ecommerce_db_test
-    DB_USER: test_user
-    DB_PASSWORD: test_password
-    PGPASSWORD: test_password
-    PYTHONPATH: .
-  run: |
-    pytest tests/ -v --cov=scripts --cov-fail-under=70
+      - name: Run tests with coverage
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: ecommerce_db_test
+          DB_USER: test_user
+          DB_PASSWORD: test_password
+          PGPASSWORD: test_password
+          PYTHONPATH: .
+        run: |
+          pytest tests/ -v --cov=scripts --cov-fail-under=70
