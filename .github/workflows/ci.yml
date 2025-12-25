@@ -1,39 +1,41 @@
-name: Data Pipeline CI
+name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # 2️⃣ Setup Python
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.9"
-          cache: pip
 
-      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov pyarrow
+          pip install pytest pytest-cov
 
       - name: Run tests with coverage
-  env:
-    PYTHONPATH: .
-  run: |
-    pytest tests/ -v \
-      --cov=scripts \
-      --cov-config=.coveragerc \
-      --cov-fail-under=70
+        env:
+          PYTHONPATH: .
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: ecommerce_db_test
+          DB_USER: test_user
+          DB_PASSWORD: test_password
+          PGPASSWORD: test_password
+        run: |
+          pytest tests/ -v \
+            --cov=scripts \
+            --cov-config=.coveragerc \
+            --cov-fail-under=70
