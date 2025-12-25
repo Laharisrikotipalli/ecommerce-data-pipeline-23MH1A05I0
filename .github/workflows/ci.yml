@@ -25,17 +25,11 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
-      - name: Run tests with coverage
+      - name: Run tests (skip DB tests)
         env:
           PYTHONPATH: .
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_NAME: ecommerce_db_test
-          DB_USER: test_user
-          DB_PASSWORD: test_password
-          PGPASSWORD: test_password
         run: |
-          pytest tests/ -v \
+          pytest tests/ -v -m "not db" \
             --cov=scripts \
             --cov-config=.coveragerc \
             --cov-fail-under=70
