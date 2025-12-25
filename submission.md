@@ -1,8 +1,11 @@
 ## Student Information
 
 **Name:** Lahari Sri Kotipalli
+
 **Roll Number:** 23MH1A05I0
+
 **Email:** laharisrikotipalli07@gmail.com
+
 **Submission Date:** 25-12-2025
 
 ---
@@ -10,9 +13,12 @@
 
 **Repository Name:**
 ecommerce-data-pipeline-23MH1A05I0
+
 **Repository URL:**
 https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
+
 **Visibility:** Public
+
 **Release Tag:** v1.0
 
 ---
@@ -44,24 +50,32 @@ https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
 
 ---
 ## Running Instructions
+
 ### Clone Repository
 ```
 git clone https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
 cd ecommerce-data-pipeline-23MH1A05I0
 ```
+
 #### Setup Environment
+
 ```
 bash setup.sh
 ```
+
 #### Run Pipeline
+
 ```
 python scripts/pipeline_orchestrator.py
 ```
+
 #### Run Tests
 ```
+
 pytest tests/ -v
 ```
 ---
+
 ## Project Statistics
 
 Total Lines of Code: Approx. 3000+
@@ -72,13 +86,13 @@ Test Coverage: Above 80%
 ---
 ## Challenges Faced and Solutions
 
-### Challenge: CI failures due to database dependency
+#### Challenge: CI failures due to database dependency
 ***Solution: Skipped database tests in CI and documented it***
 
-### Challenge: Coverage below threshold
+#### Challenge: Coverage below threshold
 ***Solution: Excluded non-testable scripts from coverage***
 
-### Challenge: Pipeline hanging during scheduling
+#### Challenge: Pipeline hanging during scheduling
 ***Solution: Added execution locks and timeout handling***
 
 ---
@@ -87,9 +101,11 @@ Test Coverage: Above 80%
 I hereby declare that this project is my original work and has been completed independently.
 
 ---
+
 ### Signature
 
 **Name:** ***Lahari Sri Kotipalli***
+
 **Date:** 25-12-2025
 
 
