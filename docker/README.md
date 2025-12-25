@@ -126,9 +126,13 @@ DB_USER=postgres
 DB_PASSWORD=postgres
 
 **Volume Mounts**
+
 Volume	Purpose
+
 pg_data	Persist PostgreSQL data
+
 ./logs	Persist pipeline logs
+
 ./data	Persist generated outputs
 
 ### Network Configuration
