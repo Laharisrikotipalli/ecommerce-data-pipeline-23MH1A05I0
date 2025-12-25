@@ -231,32 +231,46 @@ dim_payment
 **Aggregates**: Precomputed KPI tables for analytics
 
 ---
+#### Warehouse Schema (Star Schema)
 
-#### Why Star Schema?
+**Structure**
+- **Fact Table:** `fact_sales`
 
-BI-friendly structure
+**Dimensions**
+- `dim_customer`
+- `dim_product`
+- `dim_date`
+- `dim_payment`
 
-Faster joins and aggregations
-
-Simplified metric calculations
-
-Slowly Changing Dimensions (SCD)
-
-**Type 2 implemented**
-
-Maintains historical changes (e.g., customer attributes)
-
-Enables accurate historical analytics
-
-Index Strategy
-
-**Indexes applied on:**
-
-Foreign keys , Date keys , Frequently filtered columns
-
-**Purpose:** Improve query performance , Reduce dashboard load time
+**Aggregates**
+- Precomputed KPI tables used for analytics
 
 ---
+
+#### Why Star Schema?
+- BI-friendly structure  
+- Faster joins and aggregations  
+- Simplified metric calculations  
+
+---
+
+#### Slowly Changing Dimensions (SCD)
+- **Type 2 implemented**
+- Maintains historical changes (e.g., customer attributes)
+- Enables accurate historical analytics
+
+---
+
+#### Index Strategy
+**Indexes applied on:**
+- Foreign keys  
+- Date keys  
+- Frequently filtered columns  
+
+**Purpose**
+- Improve query performance  
+- Reduce dashboard load time
+
 
 ## Dashboard Access
 
