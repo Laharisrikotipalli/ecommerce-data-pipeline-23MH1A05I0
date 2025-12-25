@@ -4,15 +4,15 @@
 This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into ***PostgreSQL***, processes it through multiple schema layers, and visualizes insights using ***Power BI***.
 
 The pipeline follows modern data engineering best practices including staging, production, warehouse modeling, orchestration, testing, and containerization.
-***Architecture Layers***
-***Data Generation***
-***Data Ingestion***
-***Staging Schema***
-***Production Schema***
-***Warehouse Schema***
-***Analytics Layer***
-***BI Visualization Layer***
-***Orchestration & Monitoring***
+***Architecture Layers***,
+***Data Generation***,
+***Data Ingestion***,
+***Staging Schema***,
+***Production Schema***,
+***Warehouse Schema***,
+***Analytics Layer***,
+***BI Visualization Layer***,
+***Orchestration & Monitoring***.
 
 ---
 
@@ -253,10 +253,9 @@ Improves dashboard performance
 
 ## Dashboard & Analytics Documentation 
 Dashboard Pages Explained
-Page 1: Executive Summary
-Purpose: High-level business overview
+#### Page 1: Executive Summary
+***Purpose: High-level business overview***
 Visuals:
-
 Total Revenue
 
 Total Transactions
@@ -273,9 +272,9 @@ Payment Method Distribution
 
 Geographic Sales Map
 
-Page 2: Product Analysis
+#### Page 2: Product Analysis
 
-Purpose: Product performance insights
+***Purpose: Product performance insights***
 
 Insights:
 
@@ -285,9 +284,9 @@ Electronics category has highest profit margin
 
 Long-tail products generate lower volume
 
-Page 3: Customer Insights
+#### Page 3: Customer Insights
 
-Purpose: Customer behavior analysis
+***Purpose: Customer behavior analysis***
 
 Insights:
 
@@ -297,19 +296,17 @@ Customer retention trends visible
 
 CLV comparison across segments
 
-Page 4: Geographic & Trends
+#### Page 4: Geographic & Trends
 
-Purpose: Location & time-based analysis
+***Purpose: Location & time-based analysis***
 
 Insights:
 
 Top 5 states generate most revenue
 
-Weekend sales outperform weekdays
-
 Seasonal trends identified
 
-Metric Definitions (CRITICAL FOR SCORING)
+Metric Definitions 
 Total Revenue
 SUM(quantity × unit_price − discount)
 
@@ -322,41 +319,21 @@ Profit Margin
 Customer Lifetime Value (CLV)
 CLV = Average Order Value × Purchase Frequency × Customer Lifespan
 
-
-✔ Metric definitions explicitly documented (as required)
-
-User Guidance (Dashboard Interaction)
-
-Use Date Range filter to change analysis window
-
-Click on categories/products to drill down
-
-Cross-filtering enabled across visuals
-
-Hover to view tooltips
-
-Business Insights (Documented)
-
-Revenue concentration in few products
-
-High-value customers drive profitability
-
-Geographic sales imbalance
-
 Payment method preferences vary by region
-🧾 Declaration ✅ (THIS WAS MISSING EARLIER)
 
-Declaration
+---
+## Declaration
 
 I hereby declare that this project titled “Power BI E-Commerce Analytics Dashboard” is an original work carried out by me.
 The data, analysis, and dashboard visuals presented in this project are created for academic and learning purposes.
 Any references or tools used have been duly acknowledged, and this work has not been submitted elsewhere for any other degree or certification.
 
-Name: Lahari Sri
-Course: B.Tech (CSE)
-Institution: ———
-Date: ———
+***Name: Kotipalli Lahari Sri
+Roll.No: 23MH1A05I0
+Email: laharisrikotipalli07@gmail.com
+Submission Date: 25-12-2025***
 
-🏁 Conclusion
+---
+## Conclusion
 
 This Power BI dashboard effectively transforms raw e-commerce data into meaningful visual insights, enabling better business understanding and decision-making.
