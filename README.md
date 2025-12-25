@@ -194,27 +194,29 @@ python scripts/transformation/staging_to_production.py
 ```
 python scripts/transformation/load_warehouse.py
 ```
----
-
 ### Data Model Documentation
 
-**Staging Schema**
+#### Staging Schema
+- Exact replica of raw CSV data
+- Minimal validation
+- Temporary storage
 
-Exact replica of raw CSV data , Minimal validation , Temporary storage
-
-***Purpose**: raw data audit and recovery
+**Purpose:** Raw data audit and recovery
 
 ---
 
 #### Production Schema (3NF)
-***Why 3NF?***
 
-Eliminates redundancy , Ensures data integrity , Supports transactional correctness
+**Why 3NF?**
+- Eliminates redundancy
+- Ensures data integrity
+- Supports transactional correctness
 
-***Features***
-Primary and foreign keys , Cleaned and standardized data , Referential integrity enforced
+**Features**
+- Primary and foreign keys
+- Cleaned and standardized data
+- Referential integrity enforced
 
----
 
 #### Warehouse Schema (Star Schema)
 
