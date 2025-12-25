@@ -2,6 +2,7 @@
 
 ## Accessing the Dashboard
 - Power BI File: dashboards/powerbi/ecommerce_analytics.pbix
+- Link :https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=j8mJbj
 - Requirement: Power BI Desktop (Free)
 
 ---
