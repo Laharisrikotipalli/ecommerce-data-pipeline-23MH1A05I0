@@ -1,7 +1,7 @@
 # E-Commerce Data Analytics Pipeline
 ## Project Overview
 
-This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into PostgreSQL, processes it through multiple schema layers, and visualizes insights using Power BI / Tableau.
+This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into ***PostgreSQL***, processes it through multiple schema layers, and visualizes insights using ***Power BI***.
 
 The pipeline follows modern data engineering best practices including staging, production, warehouse modeling, orchestration, testing, and containerization.
 ***Architecture Layers***
@@ -16,14 +16,14 @@ The pipeline follows modern data engineering best practices including staging, p
 
 ---
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 ![Architecture Overview](docs/image/architecture_overview.png)
 
 This diagram shows the high-level data flow from synthetic data generation to BI visualization.
 
 ---
-## 📂 Project Structure
+## Project Structure
 ```
 ecommerce-data-pipeline/
 │
