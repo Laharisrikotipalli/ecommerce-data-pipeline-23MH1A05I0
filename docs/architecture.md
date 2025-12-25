@@ -1,7 +1,4 @@
 
----
-
-```md
 # E-Commerce Data Pipeline Architecture
 
 ## Overview
