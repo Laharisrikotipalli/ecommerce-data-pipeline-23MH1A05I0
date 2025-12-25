@@ -88,9 +88,9 @@ ecommerce-data-pipeline/
 │
 ├── sql/
 │ ├── ddl/
-│ │ ├── create_staging_tables.sql
-│ │ ├── create_production_tables.sql
-│ │ └── create_warehouse_tables.sql
+│ │ ├── create_staging_schema.sql
+│ │ ├── create_production_schema.sql
+│ │ └── create_warehouse_schema.sql
 │ │
 │ └── queries/
 │ ├── analytical_queries.sql
