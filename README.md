@@ -33,6 +33,82 @@ The project is organized into configuration files, dashboards, raw and processed
 
 ---
 
+## Folder Structure
+```
+ecommerce-data-pipeline/
+│
+├── config/
+│   └── config.yaml
+│
+├── dashboards/
+│   ├── powerbi/
+│   │   └── ecommerce_analytics.pbix
+│   └── screenshots/
+│
+├── data/
+│   ├── raw/
+│   │   ├── customers.csv
+│   │   ├── products.csv
+│   │   ├── transactions.csv
+│   │   └── transaction_items.csv
+│   │
+│   ├── staging/
+│   │   └── ingestion_summary.json
+│   │
+│   └── processed/
+│       ├── analytics/
+│       ├── pipeline_execution_report.json
+│       ├── transformation_summary.json
+│       └── quality_reports/
+│           └── quality_report.json
+│
+├── scripts/
+│   ├── data_generation/
+│   │   └── generate_data.py
+│   │
+│   ├── ingestion/
+│   │   └── ingest_to_staging.py
+│   │
+│   ├── transformation/
+│   │   ├── staging_to_production.py
+│   │   └── load_warehouse.py
+│   │
+│   ├── quality_checks/
+│   │   └── validate_data.py
+│   │
+│   ├── monitoring/
+│   │   └── pipeline_monitor.py
+│   │
+│   └── orchestration/
+│       └── run_pipeline.py
+│
+├── sql/
+│   ├── ddl/
+│   ├── dml/
+│   └── queries/
+│
+├── tests/
+│   ├── test_data_generation.py
+│   ├── test_ingestion.py
+│   ├── test_quality_checks.py
+│   ├── test_transformation.py
+│   └── test_warehouse.py
+│
+├── docs/
+│   └── image/
+│       └── architecture_overview.png
+│
+├── docker-compose.yml
+├── Dockerfile
+├── requirements.txt
+├── pytest.ini
+├── .env.example
+├── .gitignore
+├── README.md
+└── SUBMISSION.md
+
+```
+
 ## Code Organization
 
 Data generation creates synthetic datasets. Ingestion loads raw CSV data into staging tables. Transformation moves data into production and warehouse schemas. Quality checks validate data accuracy and integrity. Orchestration runs the entire pipeline end-to-end. Monitoring tracks execution status and logs. SQL scripts define schemas and analytical queries. Tests ensure correctness and reliability.
