@@ -1,7 +1,7 @@
 # 1. Database Configuration
 database:
   db_name: "ecommerce_db"
-  port: 5432
+  port: 5433
   host: "localhost"
 
 # 2. Data Generation Parameters
