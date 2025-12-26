@@ -1,236 +1,99 @@
-E-COMMERCE DATA ANALYTICS PIPELINE
+Below is **ONE SINGLE CONTINUOUS BLOCK**.
+👉 **Click once → Select all → Copy → Paste**
+It includes **architecture description**, **architecture image from repo**, and **your OneDrive Power BI link**.
+Nothing extra before or after.
 
-PROJECT OVERVIEW
-This project implements an end-to-end E-Commerce Data Analytics Pipeline that generates synthetic data, ingests it into PostgreSQL, processes it across staging, production, and warehouse layers, and visualizes insights using Power BI.
+---
 
-The pipeline follows modern data engineering best practices including:
-- Data Generation
-- Data Ingestion
-- Staging, Production, and Warehouse Schemas
-- Orchestration and Monitoring
-- Automated Testing
-- Docker Containerization
-- BI Visualization using Power BI
+# E-COMMERCE DATA ANALYTICS PIPELINE
 
---------------------------------------------------
+## Project Overview
 
-ARCHITECTURE OVERVIEW
-The pipeline follows a three-layer architecture:
-- Staging Layer
-- Production Layer
-- Warehouse Layer
+This project implements an end-to-end E-Commerce Data Analytics Pipeline that generates synthetic data, ingests it into PostgreSQL, processes it across staging, production, and warehouse layers, and visualizes insights using Power BI. The pipeline follows modern data engineering best practices including data generation, ingestion, transformation, orchestration, automated testing, containerization, and BI visualization.
 
-The warehouse is modeled using a star schema with fact and dimension tables to support analytical queries and BI dashboards.
+## Architecture Overview
 
---------------------------------------------------
+The pipeline follows a three-layer architecture designed for scalability, data quality, and analytics performance.
 
-PROJECT STRUCTURE
+* **Staging Layer** – Stores raw ingested CSV data with minimal validation for auditing and recovery
+* **Production Layer** – Normalized (3NF) schema ensuring data integrity and consistency
+* **Warehouse Layer** – Star Schema optimized for analytical queries and BI dashboards
 
-ecommerce-data-pipeline/
-├── config/
-│   └── config.yaml
-├── dashboards/
-│   ├── powerbi/
-│   │   └── ecommerce_analytics.pbix
-│   └── screenshots/
-├── data/
-│   ├── raw/
-│   │   ├── customers.csv
-│   │   ├── products.csv
-│   │   ├── transactions.csv
-│   │   └── transaction_items.csv
-│   ├── staging/
-│   └── processed/
-│       ├── analytics/
-│       ├── pipeline_execution_report.json
-│       ├── transformation_summary.json
-│       └── quality_reports/
-├── scripts/
-│   ├── data_generation/
-│   │   └── generate_data.py
-│   ├── ingestion/
-│   │   └── ingest_to_staging.py
-│   ├── transformation/
-│   │   └── staging_to_production.py
-│   ├── quality_checks/
-│   │   └── validate_data.py
-│   ├── monitoring/
-│   │   └── pipeline_monitor.py
-│   └── orchestration/
-│       └── run_pipeline.py
-├── sql/
-│   ├── ddl/
-│   ├── dml/
-│   └── queries/
-├── tests/
-├── docker-compose.yml
-├── Dockerfile
-├── requirements.txt
-├── pytest.ini
-├── .env.example
-├── .gitignore
-├── README.md
-└── SUBMISSION.md
+The warehouse uses a fact table and multiple dimension tables to support fast aggregations and reporting.
 
---------------------------------------------------
+### Architecture Diagram
 
-CODE ORGANIZATION
-Each folder has a single responsibility:
-- data_generation: creates synthetic datasets
-- ingestion: loads raw data into staging tables
-- transformation: moves data to production and warehouse layers
-- quality_checks: validates data quality and integrity
-- orchestration: runs the entire pipeline end-to-end
-- monitoring: tracks execution and health
-- sql: contains DDL, DML, and analytical queries
-- tests: unit and integration tests
+The architecture diagram is included in this repository at the following path:
 
---------------------------------------------------
+docs/image/architecture_overview.png
 
-CONFIGURATION
-- Database credentials are managed using environment variables
-- Configuration values are centralized in config/config.yaml
-- Docker provides a consistent execution environment
+![Architecture Overview](docs/image/architecture_overview.png)
 
---------------------------------------------------
+## Project Structure
 
-PREREQUISITES
-- Python 3.9 or higher
-- Docker and Docker Compose
-- Power BI Desktop
+The project is organized into configuration files, dashboards, raw and processed data folders, pipeline scripts, SQL files, tests, Docker configuration, and documentation. Each directory follows a clear responsibility-based structure to ensure maintainability and scalability.
 
---------------------------------------------------
+## Code Organization
 
-INSTALLATION AND SETUP
+Data generation creates synthetic datasets. Ingestion loads raw CSV data into staging tables. Transformation moves data into production and warehouse schemas. Quality checks validate data accuracy and integrity. Orchestration runs the entire pipeline end-to-end. Monitoring tracks execution status and logs. SQL scripts define schemas and analytical queries. Tests ensure correctness and reliability.
 
-Clone the repository:
-git clone https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
-cd ecommerce-data-pipeline-23MH1A05I0
+## Configuration
 
-Start PostgreSQL using Docker:
-docker compose up -d
+Database credentials are managed using environment variables. Configuration values are centralized in config/config.yaml. Docker provides a consistent and reproducible execution environment.
 
---------------------------------------------------
+## Prerequisites
 
-RUNNING THE DATA PIPELINE
+Python 3.9 or higher, Docker and Docker Compose, and Power BI Desktop.
 
-Run the complete pipeline:
-python scripts/orchestration/run_pipeline.py
+## Installation and Setup
 
-This executes:
-- Data generation
-- CSV ingestion into staging schema
-- Transformation to production schema
-- Warehouse loading using star schema
-- Analytics and reporting generation
+Clone the repository, navigate into the project directory, and start PostgreSQL using Docker Compose.
 
---------------------------------------------------
+## Running the Data Pipeline
 
-RUNNING INDIVIDUAL STEPS
+Run the pipeline orchestrator script to execute data generation, ingestion into staging, transformation to production, warehouse loading using a star schema, and analytics generation.
 
-Data Generation:
-python scripts/data_generation/generate_data.py
+## Running Individual Steps
 
-Ingestion:
-python scripts/ingestion/ingest_to_staging.py
+Each stage of the pipeline can be executed independently, including data generation, ingestion, transformation, and warehouse loading.
 
-Transformation:
-python scripts/transformation/staging_to_production.py
+## Testing
 
-Warehouse Load:
-python scripts/transformation/load_warehouse.py
+All tests can be executed using pytest. Database-related tests require the Docker PostgreSQL service to be running. Test coverage is maintained above 80 percent.
 
---------------------------------------------------
+## Data Model
 
-TESTING
+The staging schema mirrors raw CSV data with minimal validation. The production schema follows third normal form to reduce redundancy and enforce referential integrity. The warehouse schema follows a Star Schema with `fact_sales` as the fact table and customer, product, date, and payment dimensions. Slowly Changing Dimension Type 2 is implemented to preserve historical changes.
 
-Run all tests:
-pytest
+## Dashboard Access
 
-Note:
-Database-related tests require the Docker PostgreSQL service to be running.
-Test coverage is maintained above 80 percent.
+The Power BI dashboard is available in two ways:
 
---------------------------------------------------
+* **Local PBIX file:**
+  dashboards/powerbi/
 
-DATA MODEL
+* **OneDrive Download Link:**
+  [https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=j8mJbj](https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=j8mJbj)
 
-Staging Schema:
-- Replica of raw CSV data
-- Minimal validation
-- Used for auditing and recovery
+To view the dashboard:
 
-Production Schema (3NF):
-- Removes redundancy
-- Ensures referential integrity
-- Enforces primary and foreign keys
-
-Warehouse Schema (Star Schema):
-Fact Table:
-- fact_sales
-
-Dimension Tables:
-- dim_customer
-- dim_product
-- dim_date
-- dim_payment
-
-Slowly Changing Dimensions:
-- Type 2 implemented
-- Preserves historical changes
-
---------------------------------------------------
-
-DASHBOARD ACCESS
-
-The Power BI dashboard (.pbix) is available in:
-dashboards/powerbi/
-
-To view:
 1. Open Power BI Desktop
-2. Open the pbix file
-3. Click Refresh
+2. Open the PBIX file
+3. Click **Refresh** to load the latest data
 
---------------------------------------------------
+## Dashboard Pages
 
-DASHBOARD PAGES
+The Executive Summary page provides high-level metrics such as revenue, orders, average order value, profit margin, and trends. The Product Analysis page shows product and category performance. The Customer Insights page presents customer segmentation and distribution. The Geographic and Trends page displays state-wise revenue and time-based trends.
 
-Page 1: Executive Summary
-- Revenue, orders, AOV, profit margin
-- Monthly trends and category performance
+## Metric Definitions
 
-Page 2: Product Analysis
-- Product and category-wise revenue
+Total Revenue is calculated as quantity multiplied by unit price minus discount. Average Order Value is calculated as total revenue divided by total orders. Profit Margin is calculated as profit divided by total revenue. Customer Lifetime Value is derived from average order value, purchase frequency, and customer lifespan.
 
-Page 3: Customer Insights
-- Customer segmentation and distribution
+## Declaration
 
-Page 4: Geographic and Trends
-- State-wise revenue and time-based trends
-
---------------------------------------------------
-
-METRIC DEFINITIONS
-
-Total Revenue:
-SUM(quantity × unit_price − discount)
-
-Average Order Value:
-Total Revenue / Total Orders
-
-Profit Margin:
-(Total Revenue − Cost) / Total Revenue × 100
-
-Customer Lifetime Value:
-Average Order Value × Purchase Frequency × Customer Lifespan
-
---------------------------------------------------
-
-DECLARATION
-
-I hereby declare that this project titled "E-Commerce Data Analytics Pipeline" is my original work completed independently for academic purposes.
+I hereby declare that this project titled **E-Commerce Data Analytics Pipeline** is my original work completed independently for academic purposes.
 
 Name: Lahari Sri Kotipalli
 Roll Number: 23MH1A05I0
-Email: laharisrikotipalli07@gmail.com
+Email: [laharisrikotipalli07@gmail.com](mailto:laharisrikotipalli07@gmail.com)
 Submission Date: 25-12-2025
