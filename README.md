@@ -153,6 +153,6 @@ I hereby declare that this project titled **E-Commerce Data Analytics Pipeline**
 
 **Roll Number:** 23MH1A05I0
 
-**Email:** [laharisrikotipalli07@gmail.com] (mailto:laharisrikotipalli07@gmail.com)
+**Email:** laharisrikotipalli07@gmail.com (mailto:laharisrikotipalli07@gmail.com)
 
 **Submission Date:** 25-12-2025
