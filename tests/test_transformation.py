@@ -5,13 +5,16 @@ import pytest
 pytestmark = pytest.mark.db
 
 
+import os
+
 DB_CONFIG = {
-    "host": os.getenv("DB_HOST", "localhost"),
-    "port": int(os.getenv("DB_PORT", 5432)),
-    "dbname": os.getenv("DB_NAME"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
+    "host": "localhost",
+    "port": 5433,
+    "dbname": "ecommerce_db",
+    "user": "admin",
+    "password": "password"
 }
+
 
 def test_no_orphan_transactions():
     conn = psycopg2.connect(**DB_CONFIG)
