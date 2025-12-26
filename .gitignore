@@ -54,3 +54,4 @@ docker-data/
 # ===============================
 pytest_cache/
 htmlcov/
+venv/
