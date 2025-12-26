@@ -22,7 +22,6 @@ The warehouse uses a fact table and multiple dimension tables to support fast ag
 
 The architecture diagram is included in this repository at the following path:
 
-docs/image/architecture_overview.png
 
 ![Architecture Overview](docs/image/architecture_overview.png)
 
