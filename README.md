@@ -27,6 +27,7 @@ The pipeline follows a three-layer architecture designed for scalability, data q
 The warehouse uses a fact table and multiple dimension tables to support fast aggregations and reporting.
 
 ---
+
 ### Architecture Diagram
 
 The architecture diagram is included in this repository at the following path:
