@@ -129,10 +129,13 @@ Power BI Desktop.
 
 ## Installation and Setup
 
+#### GitHub Repository
+```
+https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
+```
 ### Clone the repoitory
 ```
-git clone https://github.com/<name>/ecommerce-data-pipeline
-cd <repo-name>
+git clone https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
 ```
 
 ### Start PostgreSQL using Docker Compose
