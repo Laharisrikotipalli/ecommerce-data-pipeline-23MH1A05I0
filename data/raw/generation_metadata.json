@@ -2,7 +2,7 @@
     "customers": 100,
     "products": 50,
     "transactions": 300,
-    "transaction_items": 908,
+    "transaction_items": 882,
     "customer_fk_valid": true,
     "product_fk_valid": true,
     "transaction_fk_valid": true

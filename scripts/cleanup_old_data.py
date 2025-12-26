@@ -1,5 +1,3 @@
-# scripts/cleanup_old_data.py
-
 import yaml
 import logging
 from pathlib import Path
@@ -10,7 +8,6 @@ from datetime import datetime, timedelta
 # --------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_FILE = BASE_DIR / "config" / "config.yaml"
-
 LOG_DIR = BASE_DIR / "logs"
 LOG_FILE = LOG_DIR / "scheduler_activity.log"
 
