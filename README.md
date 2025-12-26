@@ -1,355 +1,236 @@
-# E-Commerce Data Analytics Pipeline
-## Project Overview
+E-COMMERCE DATA ANALYTICS PIPELINE
 
-This project implements an end-to-end e-commerce data analytics pipeline that generates synthetic data, ingests it into ***PostgreSQL***, processes it through multiple schema layers, and visualizes insights using ***Power BI***.
+PROJECT OVERVIEW
+This project implements an end-to-end E-Commerce Data Analytics Pipeline that generates synthetic data, ingests it into PostgreSQL, processes it across staging, production, and warehouse layers, and visualizes insights using Power BI.
 
-The pipeline follows modern data engineering best practices including staging, production, warehouse modeling, orchestration, testing, and containerization.
-**Architecture Layers**,**Data Generation**,**Data Ingestion**,**Staging Schema**,**Production Schema**,**Warehouse Schema**,**Analytics Layer**,**BI Visualization Layer**,**Orchestration & Monitoring**.
+The pipeline follows modern data engineering best practices including:
+- Data Generation
+- Data Ingestion
+- Staging, Production, and Warehouse Schemas
+- Orchestration and Monitoring
+- Automated Testing
+- Docker Containerization
+- BI Visualization using Power BI
 
----
+--------------------------------------------------
 
-##  Architecture Overview
+ARCHITECTURE OVERVIEW
+The pipeline follows a three-layer architecture:
+- Staging Layer
+- Production Layer
+- Warehouse Layer
 
-![Architecture Overview](docs/image/architecture_overview.png)
+The warehouse is modeled using a star schema with fact and dimension tables to support analytical queries and BI dashboards.
 
-**This diagram shows the high-level data flow from synthetic data generation to BI visualization.**
+--------------------------------------------------
 
----
-## Project Structure
-```
+PROJECT STRUCTURE
+
 ecommerce-data-pipeline/
-│
 ├── config/
-│ └── config.yaml
-│
+│   └── config.yaml
 ├── dashboards/
-│ ├── powerbi/
-│ │ ├── ecommerce_analytics.pbix
-│ │ └── ecommerce_analytics.pbit
-│ └── screenshots/
-│ ├── page1_executive.png
-│ ├── page2_product.png
-│ ├── page3_customer.png
-│ └── page4_geographic.png
-│
+│   ├── powerbi/
+│   │   └── ecommerce_analytics.pbix
+│   └── screenshots/
 ├── data/
-│ ├── raw/
-│ │ ├── customers.csv
-│ │ ├── products.csv
-│ │ ├── transactions.csv
-│ │ └── transaction_items.csv
-│ │
-│ ├── staging/
-│ │ └── ingestion_summary.json
-│ │
-│ └── processed/
-│ ├── analytics/
-│ │ ├── query1_top_products.csv
-│ │ ├── query2_monthly_sales.csv
-│ │ ├── query3_customer_segments.csv
-│ │ ├── query4_category_sales.csv
-│ │ ├── query5_payment_methods.csv
-│ │ ├── query6_geography.csv
-│ │ ├── query7_customers.csv
-│ │ ├── query8_products.csv
-│ │ ├── query9_daily_sales.csv
-│ │ └── query10_discounts.csv
-│ │
-│ ├── monitoring_reports.json
-│ ├── pipeline_execution.json
-│ ├── transformation_summary.json
-│ └── quality_reports/
-│ └── quality_report.json
-│
+│   ├── raw/
+│   │   ├── customers.csv
+│   │   ├── products.csv
+│   │   ├── transactions.csv
+│   │   └── transaction_items.csv
+│   ├── staging/
+│   └── processed/
+│       ├── analytics/
+│       ├── pipeline_execution_report.json
+│       ├── transformation_summary.json
+│       └── quality_reports/
 ├── scripts/
-│ ├── data_generation/
-│ │ └── generate_data.py
-│ │
-│ ├── ingestion/
-│ │ └── ingest_to_staging.py
-│ │
-│ ├── transformation/
-│ │ ├── cleanup_old_data.py
-│ │ ├── load_dim_date.py
-│ │ ├── load_warehouse.py
-│ │ └── staging_to_production.py
-│ │
-│ ├── database/
-│ │ └── warehouse_setup.sql
-│ │
-│ ├── monitoring/
-│ │ └── pipeline_monitor.py
-│ │
-│ ├── quality_checks/
-│ │ └── validate_data.py
-│ │
-│ ├── pipeline_orchestrator.py
-│ └── scheduler.py
-│
+│   ├── data_generation/
+│   │   └── generate_data.py
+│   ├── ingestion/
+│   │   └── ingest_to_staging.py
+│   ├── transformation/
+│   │   └── staging_to_production.py
+│   ├── quality_checks/
+│   │   └── validate_data.py
+│   ├── monitoring/
+│   │   └── pipeline_monitor.py
+│   └── orchestration/
+│       └── run_pipeline.py
 ├── sql/
-│ ├── ddl/
-│ │ ├── create_staging_schema.sql
-│ │ ├── create_production_schema.sql
-│ │ └── create_warehouse_schema.sql
-│ │
-│ └── queries/
-│ ├── analytical_queries.sql
-│ ├── data_quality_checks.sql
-│ ├── monitoring_queries.sql
-│ ├── load_dim_date.sql
-│ └── load_fact_sales.sql
-│
+│   ├── ddl/
+│   ├── dml/
+│   └── queries/
 ├── tests/
-│ ├── test_data_generation.py
-│ ├── test_ingestion.py
-│ ├── test_quality_checks.py
-│ ├── test_transformation.py
-│ └── test_warehouse.py
-│
-├── docs/
-│ ├── architecture.md
-│ └── dashboard_guide.md
-│
 ├── docker-compose.yml
 ├── Dockerfile
 ├── requirements.txt
-├── setup.sh
-├── analytics_summary.json
 ├── pytest.ini
 ├── .env.example
 ├── .gitignore
-└── README.md
-```
----
-## Code Organization & Maintainability
+├── README.md
+└── SUBMISSION.md
 
-***The project follows a modular pipeline-based structure where each folder represents a single responsibility.***
+--------------------------------------------------
 
-### Scripts Structure
-- `data_generation/` – Synthetic data generation using Faker
-- `ingestion/` – Loads raw CSV data into staging schema
-- `transformation/` – Moves data from staging → production → warehouse
-- `pipeline_orchestrator.py` – Executes the end-to-end pipeline
+CODE ORGANIZATION
+Each folder has a single responsibility:
+- data_generation: creates synthetic datasets
+- ingestion: loads raw data into staging tables
+- transformation: moves data to production and warehouse layers
+- quality_checks: validates data quality and integrity
+- orchestration: runs the entire pipeline end-to-end
+- monitoring: tracks execution and health
+- sql: contains DDL, DML, and analytical queries
+- tests: unit and integration tests
 
-This modular design makes the system easy to debug, test, and extend.
+--------------------------------------------------
 
----
-
-## Configuration Options
+CONFIGURATION
 - Database credentials are managed using environment variables
-- Configuration values are centralized in `config/config.yaml`
-- Scripts can be executed independently or via the orchestrator
-- Docker ensures a consistent runtime environment
+- Configuration values are centralized in config/config.yaml
+- Docker provides a consistent execution environment
 
----
+--------------------------------------------------
 
-## Troubleshooting Guide
-
-| Issue | Solution |
-|-----|---------|
-| Dashboard not updating | Refresh Power BI or rerun analytics scripts |
-| Duplicate records | Verify staging truncation logic |
-| Slow queries | Use warehouse aggregate tables |
-| Database connection error | Check Docker PostgreSQL container status |
-
----
-### Technical Maintainability
-
-#### Setup Instructions
-
-##### Prerequisites
-```text
-- Python 3.9+
-- Docker & Docker Compose
-- PostgreSQL (via Docker)
+PREREQUISITES
+- Python 3.9 or higher
+- Docker and Docker Compose
 - Power BI Desktop
-```
-#### Installation
-```
-git clone <repo-url>
-cd ecommerce-data-pipeline
-pip install -r requirements.txt
-docker-compose up -d
 
-```
----
-## Running the Data Pipeline
-```
-python scripts/pipeline_orchestrator.py
-```
-***This executes:***
+--------------------------------------------------
 
-Synthetic data generation
+INSTALLATION AND SETUP
 
-CSV ingestion into staging schema
+Clone the repository:
+git clone https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0
+cd ecommerce-data-pipeline-23MH1A05I0
 
-Transformation to production schema (3NF)
+Start PostgreSQL using Docker:
+docker compose up -d
 
-Warehouse loading (star schema)
+--------------------------------------------------
 
-Analytics aggregation generation
----
+RUNNING THE DATA PIPELINE
 
-***Run Individual Steps*** 
-```
+Run the complete pipeline:
+python scripts/orchestration/run_pipeline.py
+
+This executes:
+- Data generation
+- CSV ingestion into staging schema
+- Transformation to production schema
+- Warehouse loading using star schema
+- Analytics and reporting generation
+
+--------------------------------------------------
+
+RUNNING INDIVIDUAL STEPS
+
+Data Generation:
 python scripts/data_generation/generate_data.py
-```
-```
+
+Ingestion:
 python scripts/ingestion/ingest_to_staging.py
-```
-```
+
+Transformation:
 python scripts/transformation/staging_to_production.py
-```
-```
+
+Warehouse Load:
 python scripts/transformation/load_warehouse.py
-```
----
-### Data Model Documentation
 
-#### Staging Schema
-- Exact replica of raw CSV data
+--------------------------------------------------
+
+TESTING
+
+Run all tests:
+pytest
+
+Note:
+Database-related tests require the Docker PostgreSQL service to be running.
+Test coverage is maintained above 80 percent.
+
+--------------------------------------------------
+
+DATA MODEL
+
+Staging Schema:
+- Replica of raw CSV data
 - Minimal validation
-- Temporary storage
+- Used for auditing and recovery
 
-**Purpose:** Raw data audit and recovery
+Production Schema (3NF):
+- Removes redundancy
+- Ensures referential integrity
+- Enforces primary and foreign keys
 
----
+Warehouse Schema (Star Schema):
+Fact Table:
+- fact_sales
 
-#### Production Schema (3NF)
+Dimension Tables:
+- dim_customer
+- dim_product
+- dim_date
+- dim_payment
 
-**Why 3NF?**
-- Eliminates redundancy
-- Ensures data integrity
-- Supports transactional correctness
+Slowly Changing Dimensions:
+- Type 2 implemented
+- Preserves historical changes
 
-**Features**
-- Primary and foreign keys
-- Cleaned and standardized data
-- Referential integrity enforced
+--------------------------------------------------
 
+DASHBOARD ACCESS
 
-#### Warehouse Schema (Star Schema)
+The Power BI dashboard (.pbix) is available in:
+dashboards/powerbi/
 
-**Structure**
-
-Fact Table: fact_sales
-
-**Dimensions:**
-dim_customer
-dim_product
-dim_date
-dim_payment
-
-**Aggregates**: Precomputed KPI tables for analytics
-
----
-#### Warehouse Schema (Star Schema)
-
-**Structure**
-- **Fact Table:** `fact_sales`
-
-**Dimensions**
-- `dim_customer`
-- `dim_product`
-- `dim_date`
-- `dim_payment`
-
-**Aggregates**
-- Precomputed KPI tables used for analytics
-
----
-
-#### Why Star Schema?
-- BI-friendly structure  
-- Faster joins and aggregations  
-- Simplified metric calculations  
-
----
-
-#### Slowly Changing Dimensions (SCD)
-- **Type 2 implemented**
-- Maintains historical changes (e.g., customer attributes)
-- Enables accurate historical analytics
-
----
-
-#### Index Strategy
-**Indexes applied on:**
-- Foreign keys  
-- Date keys  
-- Frequently filtered columns  
-
-**Purpose**
-- Improve query performance  
-- Reduce dashboard load time
-
-
-## Dashboard Access
-The Power BI dashboard file (.pbix) is available at the link below:
-
-**PBIX Download Link:**  
-https://adityagroup-my.sharepoint.com/:u:/g/personal/23mh1a05i0_acoe_edu_in/IQBv4ElDQPvbRa8R_ere1HYyAVVpCkm19IaIB-JLUZA0G6g?e=j8mJbj
-
-To view the dashboard:
+To view:
 1. Open Power BI Desktop
-2. Download or open the PBIX file
-3. Click **Refresh** to load the latest data
----
+2. Open the pbix file
+3. Click Refresh
 
-## Dashboard Pages
+--------------------------------------------------
 
-### Page 1: Executive Summary
-**Purpose:** High-level business overview  
-**Visuals:** Revenue, transactions, AOV, profit margin, monthly trends, category-wise revenue, payment methods, geographic distribution
+DASHBOARD PAGES
 
----
+Page 1: Executive Summary
+- Revenue, orders, AOV, profit margin
+- Monthly trends and category performance
 
-### Page 2: Product Analysis
-**Purpose:** Product performance overview  
-**Visuals:** Product-wise revenue, category-wise sales
+Page 2: Product Analysis
+- Product and category-wise revenue
 
----
+Page 3: Customer Insights
+- Customer segmentation and distribution
 
-### Page 3: Customer Insights
-**Purpose:** Customer-level analysis  
-**Visuals:** Revenue by customer segment, customer distribution
+Page 4: Geographic and Trends
+- State-wise revenue and time-based trends
 
----
+--------------------------------------------------
 
-### Page 4: Geographic & Trends
-**Purpose:** Location and time-based analysis  
-**Visuals:** State-wise revenue, time-based sales trends
+METRIC DEFINITIONS
 
----
-
-## Metric Definitions
-
-***Total Revenue***
-```
+Total Revenue:
 SUM(quantity × unit_price − discount)
-```
-***Average Order Value (AOV)***
-```
+
+Average Order Value:
 Total Revenue / Total Orders
-```
-***Profit Margin***
-```
+
+Profit Margin:
 (Total Revenue − Cost) / Total Revenue × 100
-```
-***Customer Lifetime Value (CLV)***
-```
+
+Customer Lifetime Value:
 Average Order Value × Purchase Frequency × Customer Lifespan
-```
----
-## Declaration
 
-I hereby declare that this project titled “Power BI E-Commerce Analytics Dashboard” is an original work carried out by me.
-The data, analysis, and dashboard visuals presented in this project are created for academic and learning purposes.
-Any references or tools used have been duly acknowledged, and this work has not been submitted elsewhere for any other degree or certification.
+--------------------------------------------------
 
-**Name: Kotipalli Lahari Sri**
-**Roll.No: 23MH1A05I0**
-**Email: laharisrikotipalli07@gmail.com**
-**Submission Date: 25-12-2025**
+DECLARATION
 
-# trigger
+I hereby declare that this project titled "E-Commerce Data Analytics Pipeline" is my original work completed independently for academic purposes.
+
+Name: Lahari Sri Kotipalli
+Roll Number: 23MH1A05I0
+Email: laharisrikotipalli07@gmail.com
+Submission Date: 25-12-2025
