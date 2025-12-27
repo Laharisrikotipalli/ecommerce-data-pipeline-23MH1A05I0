@@ -3,9 +3,6 @@
 
 # E-Commerce Data Analytics Pipeline
 
-
-# E-Commerce Data Analytics Pipeline
-
 ## Project Overview
 
 This project implements an end-to-end E-Commerce Data Analytics Pipeline that generates synthetic data, ingests it into PostgreSQL, processes it across staging, production, and warehouse layers, and visualizes insights using Power BI. The pipeline follows modern data engineering best practices including data generation, ingestion, transformation, orchestration, automated testing, containerization, and BI visualization.
