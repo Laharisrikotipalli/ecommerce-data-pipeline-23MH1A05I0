@@ -1,3 +1,8 @@
+![CI Status](https://github.com/Laharisrikotipalli/ecommerce-data-pipeline-23MH1A05I0/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-%3E70%25-brightgreen)
+
+# E-Commerce Data Analytics Pipeline
+
 
 # E-Commerce Data Analytics Pipeline
 
