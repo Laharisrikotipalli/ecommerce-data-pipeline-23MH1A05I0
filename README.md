@@ -235,6 +235,18 @@ The Executive Summary page provides high-level metrics such as revenue, orders, 
 Total Revenue is calculated as quantity multiplied by unit price minus discount. Average Order Value is calculated as total revenue divided by total orders. Profit Margin is calculated as profit divided by total revenue. Customer Lifetime Value is derived from average order value, purchase frequency, and customer lifespan.
 
 ---
+## CI Pipeline Evidence
+
+This project uses GitHub Actions for Continuous Integration.
+The pipeline automatically runs on every push and pull request.
+
+### Successful CI Run
+![CI Success](screenshots/ci-success.png)
+
+### Test Coverage
+![Coverage](screenshots/coverage.png)
+
+---
 
 ## Declaration
 
